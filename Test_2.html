@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+</head>
+<body>
+
+    <script>
+        function readUserName(){
+            userName = ''
+            while(userName.length == 0){
+                validName = false
+                userName=prompt("Please enter your name")
+            }
+            alert("HI "+userName)
+        }
+        function correctPassword(){
+            password=""
+            countWronge=0
+            while(password!='123' && countWronge<3){
+                password=prompt("please enter your password")
+                if (password=="123") {
+                    alert('correct password!!')
+                    return true
+                }
+                countWronge++;
+            }
+            alert("you’ve entered wrong password 3 times")
+            return false
+        }
+        function getMonth(){
+            while(true){
+                month = prompt("please enter your birth month")
+                if (month>0 && month<=12) {
+                    return month
+                }
+            }   
+        }
+        function getDay(month){
+            //maximum day limit per month
+            monthDays =[31,28,31,30,31,30,31,31,30,31,30,31]
+            while(true){
+                day = prompt("please enter your birth day")
+                //if day is not more than maximum day in this month and more than 0
+                //return day else repeat 
+                if (day>0 && day<=monthDays[month-1]) {
+                    return day
+                }
+            }   
+        }
+        function getHoroscope(month,day){
+            fromDay = [20,19,21,20,21,21,23,23,23,23,22,22]
+            // month -1 to cope with array index
+            month--;
+            horoscope = ['Capricorn', 'Aquarius', 'Pisces', 'Aries', 'Taurus', 'Gemini',
+             'Cancer', 'Leo', 'Virgo', 'Libra', 'Scorpio', 'Sagittarius']
+            //if day is more than horoscope limits increase to next month
+            if (day >= fromDay[month]) {
+                month++;
+            }
+            //'%' added in case month reached 12 to prevent out of index
+            alert("Your horoscope is : "+horoscope[month%12])
+        }
+
+        function start(){
+            readUserName()
+            if(correctPassword()){
+                month = getMonth()
+                day=getDay(month)
+                getHoroscope(month,day)
+                
+            }
+        }
+        //starting script
+        start()
+    </script>
+</body>
+</html>
